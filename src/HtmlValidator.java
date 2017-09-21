@@ -1,5 +1,4 @@
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 /*
  * SD2x Homework #2
@@ -11,36 +10,52 @@ public class HtmlValidator {
 
     public static Stack<HtmlTag> isValidHtml(Queue<HtmlTag> tags) {
         Stack<HtmlTag> openTags = new Stack<>();
-        Stack<HtmlTag> closeTags = new Stack<>();
+        LinkedList<HtmlTag> closeTags = new LinkedList<>();
         Stack<HtmlTag> resultTags = new Stack<>();
         HtmlTag openTag, closeTag;
         HtmlTag currentTag;
 
-     //   for (HtmlTag item : tags){
-        //       System.out.println(item);
-        //}
+        System.out.println("queues of tags");
+        System.out.println(tags);
 
         while (!tags.isEmpty()) {
             currentTag = tags.poll();
-            if (currentTag.isOpenTag() && !currentTag.isSelfClosing()) {
-                openTags.push(currentTag);
-            } else if (!currentTag.isSelfClosing() && !currentTag.isOpenTag()) {
-                closeTags.push(currentTag);
+            if (!currentTag.isSelfClosing()) {
+                if (currentTag.isOpenTag()) {
+                    openTags.push(currentTag);
+                } else {
+                    closeTags.add(currentTag);
+                }
             }
         }
-        int count = 0;
-        while (openTags.empty()) {
-            count++;
+        System.out.println("Open tags");
+        System.out.println(openTags);
+        System.out.println("Close tags");
+        System.out.println(closeTags);
+        if (openTags.isEmpty() || closeTags.isEmpty() || closeTags.size()>openTags.size()){
+            System.out.println("return null");
+            return null;
+        }
+        while (!closeTags.isEmpty() && !openTags.isEmpty()) {
+            System.out.println("while2");
             openTag = openTags.pop();
-            System.out.println("Open Tag" +count +"  "+ openTag);
-            closeTag = closeTags.pop();
-            System.out.println("Close Tag"+count +"  " + closeTag);
-            if (openTag.matches(closeTag)) {
+            System.out.println("Open Tag"  + openTag);
+            closeTag = closeTags.removeFirst();
+            System.out.println("Close Tag" + closeTag);
+            System.out.println(openTag.element +"=="+closeTag.element);
+            if (!openTag.element.equals(closeTag.element)) {
+                System.out.println("adding tag" + openTag);
                 resultTags.push(openTag);
+                break;
             }
-        }
 
-        return resultTags; // this line is here only so this code will compile if you don't modify it
+        }
+        System.out.println(closeTags);
+        System.out.println("Result STACK");
+        System.out.println(resultTags);
+        System.out.println("Open STACK ");
+        System.out.println(openTags);
+        return openTags; // this line is here only so this code will compile if you don't modify it
     }
 
 

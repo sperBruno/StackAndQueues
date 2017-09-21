@@ -31,6 +31,7 @@ public class HtmlTag {
     }
     
     public boolean matches(HtmlTag other) {
+        System.out.println("MATCHES "+ other.element+ "And "+ element + " And "+ openTag+" : "+other.openTag );
         return other != null 
         	&& element.equalsIgnoreCase(other.element)
         	&& openTag != other.openTag;

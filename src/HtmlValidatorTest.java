@@ -52,7 +52,7 @@ public class HtmlValidatorTest
       Assert.fail("isValidHtml throws " + localException + " when file ends without closing tags");
     }
   }
-  
+
   @Test
   public void testFile3() {
     try {
@@ -69,7 +69,7 @@ public class HtmlValidatorTest
       Assert.fail("isValidHtml throws " + localException + " when tags are closed in incorrect order");
     }
   }
-  
+
   @Test
   public void testFile4() {
     try {
@@ -80,7 +80,7 @@ public class HtmlValidatorTest
       Assert.fail("isValidHtml throws " + localException + " when encountering closing tag without matching opening tag");
     }
   }
-  
+
   @Test
   public void testFile5()
   {
@@ -95,7 +95,7 @@ public class HtmlValidatorTest
       Assert.fail("isValidHtml throws " + localException + " for a valid HTML file input.");
     }
   }
-  
+
   @Test
   public void testFile6() {
     try {
@@ -114,7 +114,7 @@ public class HtmlValidatorTest
       Assert.fail("isValidHtml throws " + localException + " when some tags are not closed");
     }
   }
-  
+
   @Test
   public void testFile7() {
     try {
